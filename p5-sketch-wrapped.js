@@ -1,14 +1,21 @@
 // pass in p5.js as function argument p5
 export default function sketch (p5) {
 
+let yvalues=[];
+
+calcWave();
+renderWave(); 
+sun();
+
 //waves
+let localProps = {};
 let xspacing = 16;    // Distance between each horizontal location
 let w;                // Width of entire wave
 let theta = 0.0;      // Start angle at 0
 let amplitude = 50.0; // Height of wave
 let period = 500.0;   // How many pixels before the wave repeats
 let dx;               // Value for incrementing x
-let yvalues;  // Using an array to store height values for the wave
+//let yvalues;  // Using an array to store height values for the wave
 
 //bubbles
 let f=[];
@@ -16,11 +23,14 @@ let numberFish= 67;
 let b=[];
 let numberBubbles=400;
 
+
+
+
 p5.setup = function() {
- p5.createCanvas(displayWidth, displayHeight);
-  w = width+16;
-  dx = (TWO_PI / period) * xspacing;
-  yvalues = new Array(floor(w/xspacing));
+ p5.createCanvas(p5.displayWidth, p5.displayHeight);
+  w = p5.width+16;
+  dx = (p5.TWO_PI / period) * xspacing;
+  yvalues = new Array(p5.floor(w/xspacing));
 	
 	  //adds 50 fish to the array
   for (var i=0; i<numberFish; i++) {
@@ -50,9 +60,7 @@ p5.draw = function() {
        f[i].draw();
   }
 	
-  p5.calcWave();
-  p5.renderWave(); 
-	p5.sun();
+
 }
 
 function calcWave() {
@@ -69,7 +77,7 @@ function calcWave() {
 }
 
 function renderWave() {
-  noStroke();
+  p5.noStroke();
   fill(255);
   // A simple way to draw the wave with an ellipse at each location
   for (var x = 0; x < yvalues.length; x++) {
@@ -83,48 +91,48 @@ function sun(){
 }
 
 function Fish(){
-  this.x= random (0,width);
-  this.y=random (0,height);
-  this.speed=random(0.5,2);
+  this.x= p5.random (0,p5.width);
+  this.y=p5.random (0,p5.height);
+  this.speed=p5.random(0.5,2);
   //determines whether it moves right or left
-  if (random (-1,1) <0) { 
+  if (p5.random (-1,1) <0) { 
   //if it moves left speed will be a negative number  
   this.speed *= -1;}
-  this.size=random (10,20);
-  this.r=random (0,255);
-  this.g=random (0,255);
-  this.b=random (0,255);
+  this.size=p5.random (10,20);
+  this.r=p5.random (0,255);
+  this.g=p5.random (0,255);
+  this.b=p5.random (0,255);
 }
     
 Fish.prototype.constructor=Fish;
 Fish.prototype.draw=function(){
-  fill (this.r, this.g, this.b);
+  p5.fill (this.r, this.g, this.b);
   
   //push says i am going to move the grid remember where it is right now
-  push();
+  p5.push();
   
   //translate moves 0,0 point to where we want it to be
-  translate(this.x,this.y);
+  p5.translate(this.x,this.y);
   if(this.speed<0){
      //moving left
     
     //turns the grib upside down if the fish is moving left
-    rotate(PI);
+    p5.rotate(p5.PI);
   
   }
-  triangle (0, 0, 0, -this.size, this.size,
+  p5.triangle (0, 0, 0, -this.size, this.size,
             -this.size/2);
-  ellipse (this.size*2.5, -this.size/2, this.size*2.7, 
+  p5.ellipse (this.size*2.5, -this.size/2, this.size*2.7, 
            this.size);
   
     //pop says i am done to moving the grid go back to where it was before 
-     pop();
+     p5.pop();
   
 };
 
 Fish.prototype.swim = function(){
   this.x += this.speed;
-  if (this.x<=-this.size*4 || this.x >=width+this.size*4) {
+  if (this.x<=-this.size*4 || this.x >=p5.width+this.size*4) {
        this.speed *= -1;
     
   }
@@ -132,9 +140,9 @@ Fish.prototype.swim = function(){
 
 
 function Bubble(){
-   this.x=random (0,width);
-   this.size= random (3,15);
-   this.y=height+random(this.size*2,this.size*20);
+   this.x=p5.random (0,p5.width);
+   this.size=p5.random (3,15);
+   this.y=p5.height+p5.random(this.size*2,this.size*20);
    this.speed= 2;
   
 }
@@ -148,8 +156,8 @@ Bubble.prototype.move= function (){
 };
 
 Bubble.prototype.draw=function(){
-       fill(255,255,255,75);
-      ellipse(this.x,this.y,this.size,this.size);
+       p5.fill(255,255,255,75);
+       p5.ellipse(this.x,this.y,this.size,this.size);
         
 };
 
