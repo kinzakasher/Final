@@ -156,21 +156,6 @@ Bubble.prototype.draw=function(){
   // this special function receives data from App.jsx withTracker
   p5.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     console.log("myCustomRedrawAccordingToNewPropsHandler", props, localProps);
-
-    if (!localProps.renderDisplay) {
-      localProps = props;
-      
-<<<<<<< Updated upstream
-      // setInterval(function() {
-      //   sendPixels()
-      // }, 100);
-=======
-      //setInterval(function() {
-      //  sendPixels()
-      //}, 100);
-      
->>>>>>> Stashed changes
-    }
     
 
   };
