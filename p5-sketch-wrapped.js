@@ -17,7 +17,7 @@ let b=[];
 let numberBubbles=400;
 
 p5.setup = function() {
-  createCanvas(displayWidth, displayHeight);
+ p5.createCanvas(displayWidth, displayHeight);
   w = width+16;
   dx = (TWO_PI / period) * xspacing;
   yvalues = new Array(floor(w/xspacing));
